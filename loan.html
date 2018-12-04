@@ -26,6 +26,7 @@
 
     <!-- Template JS Files -->
     <script src="js\modernizr.js"></script>
+    <link rel="stylesheet" href="cal/cal.css" type="text/css">
 
 </head>
 
@@ -136,6 +137,44 @@
     </section>
     <!-- Banner Area Ends -->
     <!-- Contact Section Starts -->
+    <section class="bitcoin-calculator-section">
+        <div class="container">
+            <div class="row">
+                <!-- Section Heading Starts -->
+                <div class="col-md-12">
+                    <h2 class="title-head text-center"><span>Loan</span> Calculator</h2>
+                    <p class="message text-center">Find out how much you would pay back value with our easy-to-use
+                        calculator</p>
+
+                    <!-- Section Heading Ends -->
+
+                    <div class=" pad col-lg-12 text-center">
+                        <div class="col-lg-7">
+                            <div class="slidecontainer">
+
+                                <input type="range" min="30000" max="1000000" value="0" step="10000" class="slider-cal"
+                                       id="myAmount">
+                                <p>Amount: ₦<span id="displayAmount"></span></p>
+                            </div>
+                            <div class="slidecontainer">
+
+                                <input type="range" min="1" max="6" value="1" class="slider-cal" id="myTerm">
+                                <p>Term: <span id="displayTerm"></span class="title-head"> Months</p>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <button class="btn btn-primary " onclick="calculate()"> calculate</button>
+                            <p class="message text-center"> your monthly repayment is = ₦<span id="result"></span></p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+    </section>
     <section class="contact">
         <div class="container">
             <div class="row">
@@ -168,12 +207,6 @@
                         </div>
                         <!-- Input Field Ends -->
                         <!-- Input Field Starts -->
-
-                        <div class="form-group col-md-6">
-                            <input class="form-control" name="bvn" id="subject" placeholder="BANK VERIFICATION NUMBER "
-                                   type="number" required="">
-                        </div>
-
                         <div class="form-group col-md-6">
                             <input class="form-control" name="amount" id="amount" placeholder="LOAN AMOUNT"
                                    type="number" required="">
@@ -182,12 +215,12 @@
                         <!-- Input Field Starts -->
                         <div class="form-group col-md-6">
                             <input class="form-control" name="birthday" id="birthday" placeholder="BIRTHDAY "
-                                   type="date" required="">
+                                   type="text" required="">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <input class="form-control" name="term" id="term" placeholder="TERM"
-                                   type="number" required="">
+                            <input class="form-control" name="term" id="term" placeholder="REPAYMENT PERIOD"
+                                   type="text" required="">
                         </div>
                         <!-- Input Field Ends -->
                         <!-- Input Field Starts -->
@@ -225,6 +258,11 @@
                         <div class="form-group col-md-6">
                             <input class="form-control" name="lga" id="lga" placeholder="LOCAL GOVERNMENT AREA"
                                    type="text" required="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label> Please upload your image</label>
+                            <input  name="file" id="file" placeholder="Please upload your image"
+                                   type="file" required="">
                         </div>
                         <!-- Input Field Ends -->
                         <div class="form-group col-md-12">
@@ -348,10 +386,10 @@
                         <h4>Contact Us </h4>
                         <div class="contacts">
                             <div>
-                                <span>info@myteefinance.com</span>
+                                <span>INFO@FYNAZELIMITED.COM</span>
                             </div>
                             <div>
-                                <span>+23470-3364-3159</span>
+                                <span>+2347032948457</span>
                             </div>
                             <div>
                                 <span>Lagos,Nigeria</span>
@@ -410,6 +448,8 @@
 
 <!-- Live Style Switcher JS File - only demo -->
 <script src="js\styleswitcher.js"></script>
+<script src="cal\cal.js" type="text/javascript" rel="script"></script>
+
 
 </div>
 <!-- Wrapper Ends -->

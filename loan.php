@@ -14,7 +14,6 @@ $last_name = mysqli_real_escape_string($link, $_REQUEST['last_name']);
 $email = mysqli_real_escape_string($link, $_REQUEST['email']);
 $phone = mysqli_real_escape_string($link, $_REQUEST['phone']);
 $birthday = mysqli_real_escape_string($link, $_REQUEST['birthday']);
-$bvn = mysqli_real_escape_string($link, $_REQUEST['bvn']);
 $amount = mysqli_real_escape_string($link, $_REQUEST['amount']);
 $term = mysqli_real_escape_string($link, $_REQUEST['term']);
 $gender = mysqli_real_escape_string($link, $_REQUEST['gender']);
@@ -28,7 +27,7 @@ $lga = mysqli_real_escape_string($link, $_REQUEST['lga']);
 
 
 // attempt insert query execution
-$sql = "INSERT INTO loans (first_name, last_name, email,phone,bvn,amount,birthday,term,gender,status,employment_status,current_employer,employer_address,residential_address,city,lga) VALUES ('$first_name', '$last_name', '$email', '$phone','$bvn','$amount','$birthday','$term','$gender','$status','$employment_status'
+$sql = "INSERT INTO loans (first_name, last_name, email,phone,amount,birthday,term,gender,status,employment_status,current_employer,employer_address,residential_address,city,lga) VALUES ('$first_name', '$last_name', '$email', '$phone','$bvn','$amount','$birthday','$term','$gender','$status','$employment_status'
 ,'$current_employer','$employer_address','$residential_address','$city','$lga')";
 if (mysqli_query($link, $sql)) {
     echo "Records added successfully.";

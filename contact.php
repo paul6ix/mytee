@@ -1,58 +1,4 @@
-﻿<?php
-/**
- * This example shows how to handle a simple contact form.
- */
-//Import PHPMailer classes into the global namespace
-
-//Don't run this unless we're handling a form submission
-if (array_key_exists('email', $_POST)) {
-    date_default_timezone_set('Etc/UTC');
-    require 'PHPMailerAutoload.php';
-    //Create a new PHPMailer instance
-    $mail = new PHPMailer;
-    //Tell PHPMailer to use SMTP - requires a local mail server
-    //Faster and safer than using mail()
-    $mail->isSMTP();
-    $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-    $mail->Host = 'mail.touchcoreltd.com';  // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'paul.chidi@touchcoreltd.com';                 // SMTP username
-    $mail->Password = '@@paul++6ix';                           // SMTP password
-    $mail->SMTPSecure = 'false';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to
-
-    //Use a fixed address in your own domain as the from address
-    //**DO NOT** use the submitter's address here as it will be forgery
-    //and will cause your messages to fail SPF checks
-    $mail->setFrom('paul.chidi@touchcoreltd.com', 'Paul chidi');
-    //Send the message to yourself, or whoever should receive contact for submissions
-    $mail->addAddress('okporp@gmail.com', 'touch');
-    //Put the submitter's address in a reply-to header
-    //This will fail if the address provided is invalid,
-    //in which case we should ignore the whole request
-    if ($mail->addReplyTo($_POST['email'], $_POST['name'])) {
-        $mail->Subject = 'PHPMailer contact form';
-        //Keep it simple - don't use HTML
-        $mail->isHTML(false);
-        //Build a simple message body
-        $mail->Body = <<<EOT
-Email: {$_POST['email']}
-Name: {$_POST['name']}
-Message: {$_POST['message']}
-EOT;
-        //Send the message, check for errors
-        if (!$mail->send()) {
-            //The reason for failing to send will be in $mail->ErrorInfo
-            //but you shouldn't display errors to users - process the error, log it on your server.
-            $msg = 'Sorry, something went wrong. Please try again later.';
-        } else {
-            $msg = 'Message sent! Thanks for contacting us.';
-        }
-    } else {
-        $msg = 'Invalid email address, message ignored.';
-    }
-}
-?>
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,90 +31,7 @@ EOT;
 </head>
 
 <body>
-<!-- SVG Preloader Starts -->
-<!--<div id="preloader">
-    <div id="preloader-content">
 
-        <svg class="lds-spinner" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg"
-             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;">
-            <g transform="rotate(0 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(30 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(60 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(90 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(120 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(150 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(180 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(210 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(240 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(270 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(300 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-            <g transform="rotate(330 50 50)">
-                <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fc4309">
-                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s"
-                             repeatCount="indefinite"></animate>
-                </rect>
-            </g>
-        </svg>
-    </div>
-</div>-->
-<!-- SVG Preloader Ends -->
-
-<!-- Wrapper Starts -->
 <div class="wrapper">
     <!-- Header Starts -->
     <header class="header">
@@ -278,7 +141,7 @@ EOT;
                     <p class="col-xs-12">Need to speak to us? Do you have any queries or suggestions? Please contact us
                         about all enquiries including membership and volunteer work using the form below.</p>
                     <!-- Contact Form Starts -->
-                    <form class="form-contact" method="post">
+                    <form class="form-contact" action="send.php" method="post">
                         <!-- Input Field Starts -->
                         <div class="form-group col-md-6">
                             <input class="form-control" name="name" id="name" placeholder="NAME" type="text"
@@ -334,7 +197,7 @@ EOT;
                                 <i class="fa fa-phone big-icon"></i>
                                 <div class="contact-info-box-content">
                                     <h4>Phone Numbers</h4>
-                                    <p>+23470-3364-3159</p>
+                                   <p>+2347032948457</p>
                                 </div>
                             </div>
                             <!-- Contact Info Box Ends -->
@@ -344,7 +207,7 @@ EOT;
                                 <div class="contact-info-box-content">
                                     <h4>Email Address</h4>
 
-                                    <p>INFO@MYTEEFINANCE.COM</p>
+                                    <p>info@fynazelimited.com</p>
                                 </div>
                             </div>
                             <!-- Contact Info Box Ends -->
@@ -430,10 +293,10 @@ EOT;
                         <h4>Contact Us </h4>
                         <div class="contacts">
                             <div>
-                                <span>info@myteefinance.com</span>
+                                <span>info@fynazelimited.com</span>
                             </div>
                             <div>
-                                <span>+23470-3364-3159</span>
+                                     <span>+2347032948457</span>
                             </div>
                             <div>
                                 <span>Lagos,Nigeria</span>
