@@ -9,7 +9,7 @@ $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
 );
-$apikey = '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';
+$apikey = 'Replace api key';
 $sendgrid = new \SendGrid($apikey);
 try {
     $response = $sendgrid->send($email);
