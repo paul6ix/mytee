@@ -62,7 +62,6 @@ $email->addTo("loans@fynazelimited.com");
 $email->addContent(
     "text/html", "<strong>$message $amt from $name $lastname kindly reply this email: <br> $mail <br>Query database for further details </strong>"
 );
-$apikey = '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';
 $sendgrid = new \SendGrid($apikey);
 try {
     $response = $sendgrid->send($email);

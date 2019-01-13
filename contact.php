@@ -188,7 +188,7 @@
                                 <i class="fa fa-home big-icon"></i>
                                 <div class="contact-info-box-content">
                                     <h4>Address</h4>
-                                    <p>14 Agungi,Lagos,Nigeria</p>
+                                    <p>14 Bankole Lukmun Street,lekki,Lagos,Nigeria</p>
                                 </div>
                             </div>
                             <!-- Contact Info Box Ends -->

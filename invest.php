@@ -1,4 +1,6 @@
 <?php
+
+require 'vendor/autoload.php'; //If you're using Composer (recommended)
 /* Attempt MySQL server connection. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 $link = mysqli_connect("localhost", "ixtechco_paul", "@@paul++6ix", "ixtechco_mytee");
@@ -38,4 +40,37 @@ if (mysqli_query($link, $sql)) {
 
 // close connection
 mysqli_close($link);
+function send(){
+$name = $_POST['first_name'];
+$lastname =$_POST['last_name'];
+$subject = "New investment proposal";
+$amt = $_POST['amount'];
+$mail=$_POST['email'];
+$message = 'A new investment proposal has been applied for ';
+
+$email = new \SendGrid\Mail\Mail();
+$email->setFrom("info@fynazelimited.com", "Fynaze Limited");
+$email->setSubject($subject);
+$email->addTo("Fynazelimited@gmail.com", $name);
+$email->addTo("invest@fynazelimited.com");
+
+$email->addContent(
+    "text/html", "<strong>$message $amt from $name $lastname kindly reply this email: <br> $mail <br>Query database for further details </strong>"
+);
+$sendgrid = new \SendGrid($apikey);
+try {
+    $response = $sendgrid->send($email);
+    if($response->statusCode() == 202) {
+        
+        header('Location: success.html');
+    }
+    /* print $response->statusCode() . "\n";
+     print_r($response->headers());
+     print $response->body() . "\n";*/
+} catch (Exception $e) {
+    echo 'Caught exception: '. $e->getMessage() ."\n";
+}
+
+}
+
 ?>
