@@ -1,7 +1,7 @@
 <?php
 /* Attempt MySQL server connection. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-$link = mysqli_connect("localhost", "root", "", "mytee");
+$link = mysqli_connect("localhost", "ixtechco_paul", "@@paul++6ix", "ixtechco_mytee");
 
 // Check connection
 if ($link === false) {
@@ -29,7 +29,7 @@ $lga = mysqli_real_escape_string($link, $_REQUEST['lga']);
 $sql = "INSERT INTO invest (first_name, last_name, email,phone,birthday,term,gender,status,employment_status,current_employer,employer_address,residential_address,city,lga) VALUES ('$first_name', '$last_name', '$email', '$phone','$birthday','$term','$gender','$status','$employment_status'
 ,'$current_employer','$employer_address','$residential_address','$city','$lga')";
 if (mysqli_query($link, $sql)) {
-    echo "Records added successfully.";
+    
     header('Location: success.html');
     exit;
 } else {

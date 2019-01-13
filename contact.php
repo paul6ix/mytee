@@ -141,7 +141,7 @@
                     <p class="col-xs-12">Need to speak to us? Do you have any queries or suggestions? Please contact us
                         about all enquiries including membership and volunteer work using the form below.</p>
                     <!-- Contact Form Starts -->
-                    <form class="form-contact" action="send.php" method="post">
+                    <form class="form-contact" action="mailer.php" method="post">
                         <!-- Input Field Starts -->
                         <div class="form-group col-md-6">
                             <input class="form-control" name="name" id="name" placeholder="NAME" type="text"
@@ -155,7 +155,7 @@
                         <!-- Input Field Ends -->
                         <!-- Input Field Starts -->
                         <div class="form-group col-md-6">
-                            <input class="form-control" name="text" id="subject" placeholder="SUBJECT" type="text"
+                            <input class="form-control" name="subject" id="subject" placeholder="SUBJECT" type="text"
                                    required="">
                         </div>
                         <!-- Input Field Ends -->
@@ -358,6 +358,19 @@
 
 </div>
 <!-- Wrapper Ends -->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5bf8c9b940105007f3795ec2/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 
 </html>

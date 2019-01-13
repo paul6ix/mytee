@@ -1,7 +1,9 @@
 <?php
+require 'vendor/autoload.php'; //If you're using Composer (recommended)
+
 /* Attempt MySQL server connection. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-$link = mysqli_connect("localhost", "root", "", "mytee");
+$link = mysqli_connect("localhost", "ixtechco_paul", "@@paul++6ix", "ixtechco_mytee");
 
 // Check connection
 if ($link === false) {
@@ -27,16 +29,52 @@ $lga = mysqli_real_escape_string($link, $_REQUEST['lga']);
 
 
 // attempt insert query execution
-$sql = "INSERT INTO loans (first_name, last_name, email,phone,amount,birthday,term,gender,status,employment_status,current_employer,employer_address,residential_address,city,lga) VALUES ('$first_name', '$last_name', '$email', '$phone','$bvn','$amount','$birthday','$term','$gender','$status','$employment_status'
+$sql = "INSERT INTO loans (first_name, last_name, email,phone,amount,birthday,term,gender,status,employment_status,current_employer,employer_address,residential_address,city,lga) VALUES ('$first_name', '$last_name', '$email', '$phone','$amount','$birthday','$term','$gender','$status','$employment_status'
 ,'$current_employer','$employer_address','$residential_address','$city','$lga')";
 if (mysqli_query($link, $sql)) {
-    echo "Records added successfully.";
-    header('Location: success.html');
-    exit;
-} else {
+       send();
+    } else {
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
 // close connection
 mysqli_close($link);
-?>
+
+
+
+
+//for email
+
+function send(){
+$name = $_POST['first_name'];
+$lastname =$_POST['last_name'];
+$subject = "New Loan Request";
+$amt = $_POST['amount'];
+$mail=$_POST['email'];
+$message = 'A new loan has been applied for ';
+
+$email = new \SendGrid\Mail\Mail();
+$email->setFrom("info@fynazelimited.com", "Fynaze Limited");
+$email->setSubject($subject);
+$email->addTo("okporp@gmail.com", $name);
+$email->addTo("loans@fynazelimited.com");
+
+$email->addContent(
+    "text/html", "<strong>$message $amt from $name $lastname kindly reply this email: <br> $mail <br>Query database for further details </strong>"
+);
+$apikey = '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';
+$sendgrid = new \SendGrid($apikey);
+try {
+    $response = $sendgrid->send($email);
+    if($response->statusCode() == 202) {
+        echo "Email sent successfully";
+        header('Location: success.html');
+    }
+    /* print $response->statusCode() . "\n";
+     print_r($response->headers());
+     print $response->body() . "\n";*/
+} catch (Exception $e) {
+    echo 'Caught exception: '. $e->getMessage() ."\n";
+}
+
+}

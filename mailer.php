@@ -1,15 +1,19 @@
 <?php
 require 'vendor/autoload.php'; // If you're using Composer (recommended)
+$name = $_POST['name'];
+$mail = $_POST['email'];
+$subject = $_POST['subject'];
+$message = $_POST['message'];
 
 $email = new \SendGrid\Mail\Mail();
-$email->setFrom("paul@6ixtech.com.ng", "Fynaze");
-$email->setSubject("Testing sendgrid");
-$email->addTo("okporp@gmail.com", "New user");
+$email->setFrom("info@fynazelimited.com", "Fynaze Limited");
+$email->setSubject($subject);
+$email->addTo($mail, $name);
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
-    "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
+    "text/html", "<strong>$message</strong>"
 );
-$apikey = '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';
+$apikey = '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';
 $sendgrid = new \SendGrid($apikey);
 try {
     $response = $sendgrid->send($email);
